@@ -98,7 +98,7 @@ If set to a _number_ larger then 0, we will force the gc to run after this _numb
 
 If true then the gc is run when a user signal is sent to the running process
 
-> :info: send `SIGUSR2` except on Windows use `SIGBREAK`
+> :information_source: send `SIGUSR2` except on Windows use `SIGBREAK`
 
 #### `heapDiffOnInterrupt` _boolean_ (false)
 
