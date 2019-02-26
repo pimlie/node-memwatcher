@@ -12,21 +12,21 @@ Other tools may provide the same or better functionality, but this module is pro
 ## Setup
 > :information_source: Please note you dont need to re-build your project when en-/disabling this module, you only need to restart the server
 
-- Install with 
+##### Install
 ```
 npm install --save nuxt-memwatch
 // or
 yarn add nuxt-memwatch
 ```
 
-- Install the peerDependencies (recommended)
+##### Install the peerDependencies (recommended)
 ```
 npm install --save @airbnb/node-memwatch
 // or
 yarn add @airbnb/node-memwatch
 ```
 
-- Add `nuxt-memwatch` to `modules` section of `nuxt.config.js`
+##### Add `nuxt-memwatch` to `modules` section of `nuxt.config.js`
 ```js
   modules: [
     ['nuxt-memwatch', { graph: false }],
