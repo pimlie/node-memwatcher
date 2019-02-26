@@ -5,12 +5,12 @@
 
 ## Why and when do you use this module
 
-Other tools provide maybe the same functionality, but this module is probably the quickest way to get more insights of the memory usage by your nuxt server. Especially when using the node-memwatch peerDependency it could help you track down memory leaks. Also see the [node-memwatch](https://github.com/airbnb/node-memwatch) readme for more information
+Other tools may provide the same or better functionality, but this module is probably the quickest way to get more insights in the memory usage of your nuxt server. Especially when using the node-memwatch peerDependency it could help you track down memory leaks. Also see the [node-memwatch](https://github.com/airbnb/node-memwatch) readme for more information
 
 <p align="center"><img src="./assets/demo.gif" alt="nuxt-memwatch demo"/></p>
 
 ## Setup
-> Reminder: you dont need to re-build your project when en-/disabling this module, you only need to restart the server
+> :information_source: Please note you dont need to re-build your project when en-/disabling this module, you only need to restart the server
 
 - Install with 
 ```
@@ -54,7 +54,7 @@ or
 
 #### `graph` _boolean_ (true)
 
-If true then we print time-based graphs for the heap statistics
+If true then we print time-based graphs for the heap statistics, if false then we log the stats as normal text (and `verbose: true`, see below)
 
 #### `verbose` _boolean_ (true)
 
@@ -62,23 +62,23 @@ If true then we listen for the stats event from node-memwatch and display real t
 
 #### `graphOnGC` _boolean_ (false)
 
-If true then the graph is updated when a stats event is received. The graph is updated every 1 second so by default we also add the metrics every seconds with stats from `v8.getHeapStatistics`. This gives us a nice resolution. But this returns actual heap statistics, if you are hunting down a memory leak the more accurate heap usage from the stats event might be what you want to see (with a lower resolution as trade off)
+If true then the graph is updated when a stats event is received from node-memwatch. The graph is updated every 1 second, to match that interval we will add the metrics by default also every second. But as gc stats might not be available, we use `v8.getHeapStatistics` for that. This gives us a nice resolution, but this method returns actual heap statistics (as in, there might be data which node could release but just hasnt yet). If you are hunting down a memory leak, the heap usage just after the gc has run gives you a better understanding of your app's memory usage (with a lower resolution as trade off)
 
 #### `averages` _boolean_ (false)
 
-If true then we calculate and log long standing averages (think of uptime with eg 1min, 5min averages but with _number_ of stats). This option is ignored when `graph: true` 
+If true then we calculate and log long standing averages (think of uptime with eg 1min, 5min averages but with number of stats). This option is ignored when `graph: true` 
 
 #### `heapAverages` _[number]_ ([10, 50, 100])
 
-If `averages: true, graph: false` then we will print averages for each of these _number_ of stats events.
+If `averages: true, graph: false` then we will print averages for each of these number of stats events.
 
 #### `useMovingAverage` _number_ (0)
 
-If set to a _number_ larger then 0 we will calculate the used_heap_size by taking the moving average of this last _number_ of stats events
+If set to a _number_ larger then 0 we will calculate the used_heap_size by taking the moving average of this last number of stats events
 
 #### `leakGrowthCount` _number_ (5)
 
-We define a memory leak as when this _number_ of stats events have consecutively been growing the heap size
+We define a memory leak as when this number of stats events have consecutively been growing the heap size
 
 #### `autoHeapDiff` _boolean_ (false)
 
@@ -92,7 +92,7 @@ How often we print a header with column names when `graph: false, verbose: true`
 
 #### `gcAfterEvery` _number_ (0)
 
-If set to a _number_ larger then 0, we will force the gc to run after this _number_ of requests. E.g. when set to 1 the gc runs after every request
+If set to a number larger then 0, we will force the gc to run after this number of requests. E.g. when set to 1 the gc runs after every request
 
 > :fire: This only works when you have either installed the peerDependency or are running node with `--expose_gc`
 
@@ -110,12 +110,14 @@ If true then you can create a heap diff by sending an user signal to the running
 
 #### `nuxtHook` _string_ (listen)
 
-Normally we are interested in memory usage when nuxt is serving requests, so we start listening for stats events on the listen hook. Its probably better to not change this
+Normally we are interested in memory usage when nuxt is serving requests, so we start listening for stats events on the listen hook. You can probably leave this to the default
 
 #### `setupGraph` _function_ (undefined)
 
 If defined it receives the graph setup as the first argument. Use this to setup your own metrics
 
+> See the readme of [turtle-race](https://github.com/lbovet/turtle-race) for more information
+
 #### `graphMetric` _function_ (undefined)
 
-If defined it receives the graph as first argument, the stats as second argument and the _number_ of requests as third argument. Use this to add your own metrics
+If defined it receives the graph as first argument, the stats as second argument and the number of requests as third argument. Use this to add your own metrics
