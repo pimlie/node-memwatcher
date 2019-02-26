@@ -62,7 +62,8 @@ If true then we listen for the stats event from node-memwatch and display real t
 
 #### `graphOnGC` _boolean_ (false)
 
-If true then the graph is updated when a stats event is received from node-memwatch. The graph is updated every 1 second, to match that interval we will add the metrics by default also every second. But as gc stats might not be available, we use `v8.getHeapStatistics` for that. This gives us a nice resolution, but this method returns actual heap statistics (as in, there might be data which node could release but just hasnt yet). If you are hunting down a memory leak, the heap usage just after the gc has run gives you a better understanding of your app's memory usage (with a lower resolution as trade off)
+If true then the graph is updated when a stats event is received from node-memwatch. The graph is updated every 1 second, to match that interval we add the metrics by default also every second. As gc stats might not be available, we use `[v8.getHeapStatistics](https://nodejs.org/api/v8.html#v8_v8_getheapstatistics)` to retrieve the stats. This gives us a nice resolution, but this method returns actual heap statistics (as in, there might be memory which node could release but just hasnt yet).
+When you are hunting down a memory leak, the heap usage just after the gc has run gives you a better understanding of your app's memory usage (with a lower resolution as trade off)
 
 #### `averages` _boolean_ (false)
 
@@ -74,7 +75,7 @@ If `averages: true, graph: false` then we will print averages for each of these 
 
 #### `useMovingAverage` _number_ (0)
 
-If set to a _number_ larger then 0 we will calculate the used_heap_size by taking the moving average of this last number of stats events
+If set to a number larger then 0 we will calculate the used_heap_size by taking the moving average of this last number of stats events
 
 #### `leakGrowthCount` _number_ (5)
 
@@ -116,7 +117,7 @@ Normally we are interested in memory usage when nuxt is serving requests, so we 
 
 If defined it receives the graph setup as the first argument. Use this to setup your own metrics
 
-> See the readme of [turtle-race](https://github.com/lbovet/turtle-race) for more information
+> See the readme of [turtle-race](https://github.com/lbovet/turtle-race) and [zibar](https://github.com/lbovet/zibar) for more information
 
 #### `graphMetric` _function_ (undefined)
 
