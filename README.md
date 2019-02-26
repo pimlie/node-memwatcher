@@ -50,7 +50,7 @@ or
 
 ## Module Options
 
-#### `graph` boolean (true)
+#### `graph` _boolean_ (true)
 
 If true then we print time-based graphs for the heap statistics
 
