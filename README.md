@@ -104,7 +104,7 @@ If true then the gc is run when a user signal is sent to the running process
 
 If true then you can create a heap diff by sending an user signal to the running process. You will always need to sent two signals for both the start heap dump as the end heap dump. The heap diff will then be calculated and logged
 
-> :info: send `SIGUSR2` except on Windows use `SIGBREAK`
+> :information_source: send `SIGUSR2` except on Windows use `SIGBREAK`
 
 #### `nuxtHook` _string_ (listen)
 
