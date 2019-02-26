@@ -1,0 +1,45 @@
+{
+  "name": "nuxt-memwatch",
+  "version": "0.1.0",
+  "description": "Quickly watch real-time memory usage of your nuxt app",
+  "main": "lib/module.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "lint": "eslint lib",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "nuxt",
+    "module",
+    "memwatch",
+    "memory",
+    "leak"
+  ],
+  "author": "pimlie",
+  "license": "MIT",
+  "dependencies": {
+    "@airbnb/node-memwatch": "^1.0.2",
+    "cliui": "^4.1.0",
+    "consola": "^2.5.6",
+    "simple-statistics": "^7.0.2",
+    "std-env": "^2.2.1",
+    "turtle-race": "^1.0.7"
+  },
+  "peerDependencies": {
+    "node-memwatch": "^1.0.1"
+  },
+  "devDependencies": {
+    "@nuxtjs/eslint-config": "^0.0.1",
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.14.1",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-jest": "^22.3.0",
+    "eslint-plugin-node": "^8.0.1",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "eslint-plugin-vue": "^5.2.2"
+  }
+}
