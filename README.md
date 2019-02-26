@@ -1,11 +1,11 @@
-# Quickly watch real-time memory usage of your nuxt app
+# Quickly watch real-time memory stats of your nuxt app
 <!-- <a href="https://travis-ci.org/pimlie/nuxt-memwatch"><img src="https://api.travis-ci.org/pimlie/nuxt-memwatch.svg" alt="Build Status"></a> -->
 [![npm](https://img.shields.io/npm/dt/nuxt-memwatch.svg?style=flat-square)](https://www.npmjs.com/package/nuxt-memwatch)
 [![npm (scoped with tag)](https://img.shields.io/npm/v/nuxt-memwatch/latest.svg?style=flat-square)](https://www.npmjs.com/package/nuxt-memwatch)
 
 ## Why and when do you use this module
 
-Other tools provide maybe the same _function_ality, but this module is probably the quickest way to get more insights of the memory usage by your nuxt server. Also see the [node-memwatch](https://github.com/airbnb/node-memwatch) readme for more information
+Other tools provide maybe the same functionality, but this module is probably the quickest way to get more insights of the memory usage by your nuxt server. Especially when using the node-memwatch peerDependency it could help you track down memory leaks. Also see the [node-memwatch](https://github.com/airbnb/node-memwatch) readme for more information
 
 ## Setup
 > Reminder: you dont need to re-build your project when en-/disabling this module, you only need to restart the server
