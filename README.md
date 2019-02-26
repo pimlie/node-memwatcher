@@ -7,7 +7,7 @@
 
 Other tools provide maybe the same functionality, but this module is probably the quickest way to get more insights of the memory usage by your nuxt server. Especially when using the node-memwatch peerDependency it could help you track down memory leaks. Also see the [node-memwatch](https://github.com/airbnb/node-memwatch) readme for more information
 
-<center><img src="./assets/demo.gif" alt="nuxt-memwatch demo"/></center>
+<p align="center"><img src="./assets/demo.gif" alt="nuxt-memwatch demo"/></p>
 
 ## Setup
 > Reminder: you dont need to re-build your project when en-/disabling this module, you only need to restart the server
