@@ -121,4 +121,4 @@ If defined it receives the graph setup as the first argument. Use this to setup 
 
 #### `graphMetric` _function_ (undefined)
 
-If defined it receives the graph as first argument, the stats as second argument and the number of requests as third argument. Use this to add your own metrics
+If defined it receives the graph as first argument, the stats as second argument and the number of requests as third argument. Use this to add your own metrics, see the example in [setup](#add-nuxt-memwatch-to-modules-section-of-nuxtconfigjs)
