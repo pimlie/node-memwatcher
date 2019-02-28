@@ -1,21 +1,21 @@
 # Quickly watch real-time memory stats of your node app
-<a href="https://travis-ci.org/pimlie/memwatchers"><img src="https://api.travis-ci.org/pimlie/memwatchers.svg" alt="Build Status"></a>
-[![npm](https://img.shields.io/npm/dt/memwatchers.svg?style=flat-square)](https://www.npmjs.com/package/memwatchers)
-[![npm (scoped with tag)](https://img.shields.io/npm/v/memwatchers/latest.svg?style=flat-square)](https://www.npmjs.com/package/memwatchers)
+<a href="https://travis-ci.org/pimlie/node-memwatcher"><img src="https://api.travis-ci.org/pimlie/node-memwatcher.svg" alt="Build Status"></a>
+[![npm](https://img.shields.io/npm/dt/node-memwatcher.svg?style=flat-square)](https://www.npmjs.com/package/node-memwatcher)
+[![npm (scoped with tag)](https://img.shields.io/npm/v/node-memwatcher/latest.svg?style=flat-square)](https://www.npmjs.com/package/node-memwatcher)
 
 ## Introduction
 
 This library lets you quickly log and view graphs of the memory stats of your node application. Also it can e.g. create automatic heap diffs when a possible memory leak is detected. It is in essential a wrapper for node-memwatch, but it also provides a fake node-memwatch api which uses v8.getHeapStatistics and global.gc instead. This is because node-memwatch uses gyp bindings which might not be what you want in some cases, therefore node-memwatch is a peer dependency.
 
-<p align="center"><img src="./assets/demo.gif" alt="memwatchers demo"/></p>
+<p align="center"><img src="./assets/demo.gif" alt="node-memwatcher demo"/></p>
 
 ## Setup
 
 ##### Install
 ```
-npm install --save memwatchers
+npm install --save node-memwatcher
 // or
-yarn add memwatchers
+yarn add node-memwatcher
 ```
 
 ##### Install the peer dependency (recommended)
@@ -25,9 +25,9 @@ npm install --save @airbnb/node-memwatch
 yarn add @airbnb/node-memwatch
 ```
 
-##### Import memwatchers and start listerning
+##### Import node-memwatcher and start listerning
 ```js
-import { start } from 'memwatchers'
+import { start } from 'node-memwatcher'
 await start()
 ```
 See the [example](./example/app.js) for a demo application. To run the example: clone this repo and run `yarn install && yarn demo`
