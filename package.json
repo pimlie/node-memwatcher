@@ -9,6 +9,7 @@
   "scripts": {
     "demo": "node example/app",
     "lint": "eslint lib example",
+    "release": "yarn lint && yarn test && standard-version",
     "test": "jest"
   },
   "keywords": [

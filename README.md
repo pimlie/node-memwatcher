@@ -25,7 +25,7 @@ npm install --save @airbnb/node-memwatch
 yarn add @airbnb/node-memwatch
 ```
 
-##### Import node-memwatcher and start listerning
+##### Import node-memwatcher and start listening
 ```js
 import { start } from 'node-memwatcher'
 await start()
