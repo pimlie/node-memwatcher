@@ -9,6 +9,9 @@ This library lets you quickly log and view graphs of the memory stats of your no
 
 <p align="center"><img src="./assets/demo.gif" alt="node-memwatcher demo"/></p>
 
+Log gc stats with automatich heap dumps on possible memory leaks
+<p align="center"><img src="./assets/demo2.gif" alt="node-memwatcher demo2"/></p>
+
 ## Setup
 
 ##### Install
