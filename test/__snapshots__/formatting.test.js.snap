@@ -1,0 +1,62 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`formatting averages - getHeader 1`] = `"[90m# gc[39m       [90mcurrent[39m        [90mreal[39m    [90mmean (2)[39m       [90mσ (2)[39m    [90mmean (3)[39m       [90mσ (3)[39m"`;
+
+exports[`formatting averages - getHeapAverages 1`] = `"4        [31m128.52 MB[39m   [31m128.52 MB[39m"`;
+
+exports[`formatting averages - getHeapAverages 2`] = `"5        [31m127.95 MB[39m   [31m127.38 MB[39m   128.24 MB     283.8 k"`;
+
+exports[`formatting averages - getHeapAverages 3`] = `"6        [32m130.21 MB[39m   [32m134.74 MB[39m   [32m129.08 MB[39m       1.1 M   128.89 MB     961.6 k"`;
+
+exports[`formatting gc stats - getHeader 1`] = `"[90mfull[39m  [90mincr[39m  [90mscavg[39m [90mweak[39m      [90mtime[39m   [90mtrend[39m     [90mcurrent[39m        [90mreal[39m         [90mmin[39m         [90mmax[39m"`;
+
+exports[`formatting gc stats - getStats 1`] = `"4     3     48    2      21.1 us       0   128.52 MB   128.52 MB   184.35 MB   184.35 MB"`;
+
+exports[`formatting gc stats - getStats 2`] = `"5     3     48    2      64.7 ms       0   [31m127.95 MB[39m   [31m127.38 MB[39m   158.66 MB   184.35 MB"`;
+
+exports[`formatting gc stats - getStats 3`] = `"6     3     53    2      46.3 ms       0   [32m130.21 MB[39m   [32m134.74 MB[39m   155.52 MB   184.35 MB"`;
+
+exports[`formatting getDiff 1`] = `
+"
+[90mHEAP DIFF[39m
+          [47m[37m___[39m[49m[47m[30msize[39m[49m[47m[37m___[39m[49m[40m[30m|[39m[49m[47m[37m__[39m[49m[47m[30mnodes[39m[49m[47m[37m__[39m[49m[40m[30m|[39m[49m[47m[37m__[39m[49m[47m[30mfreed[39m[49m[47m[37m__[39m[49m
+[2mbefore[22m     [2m161.99 MB[22m   [2m1568606[22m
+[2mafter[22m      [2m161.98 MB[22m   [2m1568653[22m
+change      [31m-6.76 kB[39m      [32m1383[39m      1336
+
+[90mDETAILS[39m
+[47m[37m______[39m[49m[47m[30mwhat[39m[49m[47m[37m______[39m[49m[40m[30m|[39m[49m[47m[37m___[39m[49m[47m[30msize[39m[49m[47m[37m___[39m[49m[40m[30m|[39m[49m[47m[37m____[39m[49m[47m[30m+[39m[49m[47m[37m____[39m[49m[40m[30m|[39m[49m[47m[37m____[39m[49m[47m[30m-[39m[49m[47m[37m____[39m[49m
+Code                1.43 kB         2         0
+Socket             264.00 B         1         0
+WritableState      240.00 B         1         0
+ReadableState      216.00 B         1         0
+String             216.00 B         5         1
+Object             208.00 B         6         2
+Timeout            112.00 B         2         1
+Closure             88.00 B        12        10
+TickObject          56.00 B         1         0
+BufferList          48.00 B         1         0
+[2mSignal[22m               [2m0.00 B[22m         [2m1[22m         [2m1[22m
+[2mTimersList[22m           [2m0.00 B[22m         [2m1[22m         [2m1[22m
+[2mNumber[22m             [2m-16.00 B[22m         [2m4[22m         [2m5[22m
+[2mTCP[22m                [2m-32.00 B[22m         [2m1[22m         [2m2[22m
+[2mShutdownWrap[22m       [2m-64.00 B[22m         [2m0[22m         [2m1[22m
+[2mPromise[22m            [2m-96.00 B[22m         [2m0[22m         [2m2[22m
+[2msystem / Context[22m  [2m-128.00 B[22m         [2m1[22m         [2m3[22m
+[2mstartHeapDiff[22m     [2m-160.00 B[22m         [2m0[22m         [2m1[22m
+[2mNative[22m            [2m-384.00 B[22m      [2m1243[22m      [2m1245[22m
+[2mArray[22m             [2m-10.15 kB[22m        [2m40[22m        [2m16[22m
+"
+`;
+
+exports[`formatting getStatLine 1`] = `"[90mfull[39m=4 [90mincr[39m=3 [90mscavg[39m=48 [90mweak[39m=2 [90mtime[39m=21.1 us [90mtrend[39m=0 [90mcurrent[39m=[31m128.52 MB[39m [90mreal[39m=[31m128.52 MB[39m [90mmin[39m=184.35 MB [90mmax[39m=184.35 MB"`;
+
+exports[`formatting getStatLine 2`] = `"[90mfull[39m=5 [90mincr[39m=3 [90mscavg[39m=48 [90mweak[39m=2 [90mtime[39m=64.7 ms [90mtrend[39m=0 [90mcurrent[39m=[31m127.95 MB[39m [90mreal[39m=[31m127.38 MB[39m [90mmin[39m=158.66 MB [90mmax[39m=184.35 MB"`;
+
+exports[`formatting getStatLine 3`] = `"[90mfull[39m=6 [90mincr[39m=3 [90mscavg[39m=53 [90mweak[39m=2 [90mtime[39m=46.3 ms [90mtrend[39m=0 [90mcurrent[39m=[32m130.21 MB[39m [90mreal[39m=[32m134.74 MB[39m [90mmin[39m=155.52 MB [90mmax[39m=184.35 MB"`;
+
+exports[`formatting number columns 1`] = `"1.0"`;
+
+exports[`formatting pretty columns 1`] = `"[32m3.0[39m"`;
+
+exports[`formatting pretty columns 2`] = `"[31m1.0[39m"`;

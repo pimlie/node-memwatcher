@@ -1,73 +1,57 @@
-# Quickly watch real-time memory stats of your nuxt app
-<!-- <a href="https://travis-ci.org/pimlie/nuxt-memwatch"><img src="https://api.travis-ci.org/pimlie/nuxt-memwatch.svg" alt="Build Status"></a> -->
-[![npm](https://img.shields.io/npm/dt/nuxt-memwatch.svg?style=flat-square)](https://www.npmjs.com/package/nuxt-memwatch)
-[![npm (scoped with tag)](https://img.shields.io/npm/v/nuxt-memwatch/latest.svg?style=flat-square)](https://www.npmjs.com/package/nuxt-memwatch)
+# Quickly watch real-time memory stats of your node app
+<a href="https://travis-ci.org/pimlie/memwatchers"><img src="https://api.travis-ci.org/pimlie/memwatchers.svg" alt="Build Status"></a>
+[![npm](https://img.shields.io/npm/dt/memwatchers.svg?style=flat-square)](https://www.npmjs.com/package/memwatchers)
+[![npm (scoped with tag)](https://img.shields.io/npm/v/memwatchers/latest.svg?style=flat-square)](https://www.npmjs.com/package/memwatchers)
 
-## Why and when do you use this module
+## Introduction
 
-Other tools may provide the same or better functionality, but this module is probably the quickest way to get more insights in the memory usage of your nuxt server. Especially when using the node-memwatch peerDependency it could help you track down memory leaks. Also see the [node-memwatch](https://github.com/airbnb/node-memwatch) readme for more information
+This library lets you quickly log and view graphs of the memory stats of your node application. Also it can e.g. create automatic heap diffs when a possible memory leak is detected. It is in essential a wrapper for node-memwatch, but it also provides a fake node-memwatch api which uses v8.getHeapStatistics and global.gc instead. This is because node-memwatch uses gyp bindings which might not be what you want in some cases, therefore node-memwatch is a peer dependency.
 
-<p align="center"><img src="./assets/demo.gif" alt="nuxt-memwatch demo"/></p>
+<p align="center"><img src="./assets/demo.gif" alt="memwatchers demo"/></p>
 
 ## Setup
-> :information_source: Please note you dont need to re-build your project when en-/disabling this module, you only need to restart the server
 
 ##### Install
 ```
-npm install --save nuxt-memwatch
+npm install --save memwatchers
 // or
-yarn add nuxt-memwatch
+yarn add memwatchers
 ```
 
-##### Install the peerDependencies (recommended)
+##### Install the peer dependency (recommended)
 ```
 npm install --save @airbnb/node-memwatch
 // or
 yarn add @airbnb/node-memwatch
 ```
 
-##### Add `nuxt-memwatch` to `modules` section of `nuxt.config.js`
+##### Import memwatchers and start listerning
 ```js
-  modules: [
-    ['nuxt-memwatch', { graph: false }],
-  ]
+import { start } from 'memwatchers'
+await start()
 ```
-or 
-```js
-  modules: [
-    'nuxt-memwatch'
-  ],
-  memwatch: {
-    setupGraph(graphSetup) {
-      graphSetup.metrics.malloc = {
-        aggregator: 'avg',
-        color: 'cyan'
-      }
-    },
-    graphMetric(graph, stats) {
-      graph.metric('my metrics', 'malloc').push(stats.malloced_memory)
-    }
-  }
-```
+See the [example](./example/app.js) for a demo application. To run the example: clone this repo and run `yarn install && yarn demo`
 
-## Module Options
+## Options
 
-#### `graph` _boolean_ (true)
+#### `graph` _boolean_ (false)
 
-If true then we print time-based graphs for the heap statistics, if false then we log the stats as normal text (and `verbose: true`, see below)
+If true then we print time-based graphs for the heap statistics (see demo), if false then we log the stats as normal text (and `verbose: true`, see below)
+
+> :information_source: Make sure your project doesnt log any other information to the console because that will (partially) overwrite the graph
 
 #### `verbose` _boolean_ (true)
 
 If true then we listen for the stats event from node-memwatch and display real time gc statistics
 
-#### `graphOnGC` _boolean_ (false)
+#### `gcMetrics` _boolean_ (false)
 
-If true then the graph is updated when a stats event is received from node-memwatch. The graph is updated every 1 second, to match that interval we add the metrics by default also every second. As gc stats might not be available, we use `[v8.getHeapStatistics](https://nodejs.org/api/v8.html#v8_v8_getheapstatistics)` to retrieve the stats. This gives us a nice resolution, but this method returns actual heap statistics (as in, there might be memory which node could release but just hasnt yet).
+If true then the graph is updated when a stats event is received from node-memwatch. The graph is updated every 1 second, to match that interval we add the metrics by default also every second. As gc stats might not be available, we use [`v8.getHeapStatistics`](https://nodejs.org/api/v8.html#v8_v8_getheapstatistics) to retrieve the stats. This gives us a nice resolution, but this method returns actual heap statistics (as in, there might be memory which node could release but just hasnt yet).
 When you are hunting down a memory leak, the heap usage just after the gc has run gives you a better understanding of your app's memory usage (with a lower resolution as trade off)
 
 #### `averages` _boolean_ (false)
 
-If true then we calculate and log long standing averages (think of uptime with eg 1min, 5min averages but with number of stats). This option is ignored when `graph: true` 
+If true then we calculate and log long standing averages (think eg of uptime with 1min, 5min averages but with number of stats). This option is ignored when `graph: true` 
 
 #### `heapAverages` _[number]_ ([10, 50, 100])
 
@@ -91,12 +75,6 @@ If true then we will automatically create a heap diff when a memory leak is dete
 
 How often we print a header with column names when `graph: false, verbose: true`
 
-#### `gcAfterEvery` _number_ (0)
-
-If set to a number larger then 0, we will force the gc to run after this number of requests. E.g. when set to 1 the gc runs after every request
-
-> :fire: This only works when you have either installed the peerDependency or are running node with `--expose_gc`
-
 #### `gcOnInterrupt` _boolean_ (true)
 
 If true then the gc is run when a user signal is sent to the running process
@@ -109,16 +87,12 @@ If true then you can create a heap diff by sending an user signal to the running
 
 > :information_source: send `SIGUSR2` except on Windows use `SIGBREAK`
 
-#### `nuxtHook` _string_ (listen)
+#### `graphSetup` _[function]_ (undefined)
 
-Normally we are interested in memory usage when nuxt is serving requests, so we start listening for stats events on the listen hook. You can probably leave this to the default
-
-#### `setupGraph` _function_ (undefined)
-
-If defined it receives the graph setup as the first argument. Use this to setup your own metrics
+A function or array of functions which receives the graph setup as the first argument. Use this to setup your own metrics
 
 > See the readme of [turtle-race](https://github.com/lbovet/turtle-race) and [zibar](https://github.com/lbovet/zibar) for more information
 
-#### `graphMetric` _function_ (undefined)
+#### `graphAddMetric` _[function]_ (undefined)
 
-If defined it receives the graph as first argument, the stats as second argument and the number of requests as third argument. Use this to add your own metrics, see the example in [setup](#add-nuxt-memwatch-to-modules-section-of-nuxtconfigjs)
+A function or array of functions which are called every time new metrics are added to the graph. It receives the turtle graph as first argument and the stats as second argument. Use this to add your own metrics
