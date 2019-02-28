@@ -59,7 +59,7 @@ If `averages: true, graph: false` then we will print averages for each of these 
 
 #### `useMovingAverage` _number_ (0)
 
-If set to a number larger then 0 we will calculate the used_heap_size by taking the moving average of this last number of stats events
+If set to a number larger then 0 we will calculate the `used_heap_size` by taking the moving average of this last number of stats events
 
 #### `leakGrowthCount` _number_ (5)
 
@@ -67,7 +67,7 @@ We define a memory leak as when this number of stats events have consecutively b
 
 #### `autoHeapDiff` _boolean_ (false)
 
-If true then we will automatically create a heap diff when a memory leak is detected. The first heap dump is created at leakGrowthCount - 1.
+If true then we will automatically create a heap diff when a memory leak is detected. The first heap dump is created at `leakGrowthCount - 1`.
 
 > :fire: Taking heap dumps can be very expensive, you probably shouldnt enable this in production
 
@@ -79,13 +79,13 @@ How often we print a header with column names when `graph: false, verbose: true`
 
 If true then the gc is run when a user signal is sent to the running process
 
-> :information_source: send `SIGUSR2` except on Windows use `SIGBREAK`
+> :information_source: the interrupt signal is `SIGBREAK` on Windows and `SIGUSR2` on others
 
 #### `heapDiffOnInterrupt` _boolean_ (false)
 
 If true then you can create a heap diff by sending an user signal to the running process. You will always need to sent two signals for both the start heap dump as the end heap dump. The heap diff will then be calculated and logged
 
-> :information_source: send `SIGUSR2` except on Windows use `SIGBREAK`
+> :information_source: the interrupt signal is `SIGBREAK` on Windows and `SIGUSR2` on others
 
 #### `graphSetup` _[function]_ (undefined)
 
