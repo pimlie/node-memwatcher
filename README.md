@@ -1,8 +1,8 @@
 # Quickly watch real-time memory stats of your node app
 <a href="https://travis-ci.org/pimlie/node-memwatcher"><img src="https://api.travis-ci.org/pimlie/node-memwatcher.svg" alt="Build Status"></a>
 [![Coverage Status](https://coveralls.io/repos/github/pimlie/node-memwatcher/badge.svg?branch=master)](https://coveralls.io/github/pimlie/node-memwatcher?branch=master)
-[![npm](https://img.shields.io/npm/dt/node-memwatcher.svg?style=flat-square)](https://www.npmjs.com/package/node-memwatcher)
-[![npm (scoped with tag)](https://img.shields.io/npm/v/node-memwatcher/latest.svg?style=flat-square)](https://www.npmjs.com/package/node-memwatcher)
+[![npm](https://img.shields.io/npm/dt/node-memwatcher.svg)](https://www.npmjs.com/package/node-memwatcher)
+[![npm (scoped with tag)](https://img.shields.io/npm/v/node-memwatcher/latest.svg)](https://www.npmjs.com/package/node-memwatcher)
 
 ## Introduction
 
