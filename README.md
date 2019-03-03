@@ -106,4 +106,4 @@ A function or array of functions which are called every time new metrics are add
 
 ## Alternatives
 
-- Run node with `--trace-gc` or --trace-gc-nvp` for more detailed information
+- Run node with `--trace-gc` or `--trace-gc-nvp` for more detailed information
