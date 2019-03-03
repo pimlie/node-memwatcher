@@ -8,7 +8,7 @@
     "lib"
   ],
   "scripts": {
-    "coverage": "cat coverage/lcov.info | coveralls",
+    "coverage": "cat ./coverage/lcov.info | coveralls",
     "demo": "node example/app",
     "lint": "eslint lib example",
     "release": "yarn lint && yarn test && standard-version",
