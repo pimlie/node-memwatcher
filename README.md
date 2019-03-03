@@ -66,7 +66,7 @@ If `averages: true, graph: false` then we will print averages for each of these 
 
 #### `useMovingAverage` _number_ (0)
 
-If set to a number larger then 0 we will calculate the `used_heap_size` by taking the moving average of this last number of stats events
+If set to a number larger then 0 we will calculate the `used_heap_size` by taking the moving average of this last number of stats events. See the [faq](./wiki/FAQ#when-or-why-would-i-use-usemovingaverage) for more information
 
 #### `leakGrowthCount` _number_ (5)
 
@@ -76,7 +76,7 @@ We define a memory leak as when this number of stats events have consecutively b
 
 If true then we will automatically create a heap diff when a memory leak is detected. The first heap dump is created at `leakGrowthCount - 1`.
 
-> :fire: Taking heap dumps can be very expensive, you probably shouldnt enable this in production
+> :fire: Taking heap dumps can be very expensive, you probably shouldnt enable this in production. Also please check the [faq](./wiki/FAQ#my-application-hangs-while-taking-a-heap-dump)
 
 #### `headerEveryLines` _number_ (25)
 
@@ -107,3 +107,7 @@ A function or array of functions which are called every time new metrics are add
 ## Alternatives
 
 - Run node with `--trace-gc` or `--trace-gc-nvp` for more detailed information
+
+## Related projects
+
+- [nuxt-memwatch](https://github.com/pimlie/nuxt-memwatch) For watching memory stats of your Nuxt.js application
