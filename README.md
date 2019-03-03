@@ -35,6 +35,10 @@ await start()
 ```
 See the [example](./example/app.js) for a demo application. To run the example: clone this repo and run `yarn install && yarn demo`
 
+## FAQ
+
+Please read the [FAQ](https://github.com/pimlie/node-memwatcher/wiki/FAQ)
+
 ## Options
 
 #### `graph` _boolean_ (false)
@@ -99,3 +103,7 @@ A function or array of functions which receives the graph setup as the first arg
 #### `graphAddMetric` _[function]_ (undefined)
 
 A function or array of functions which are called every time new metrics are added to the graph. It receives the turtle graph as first argument and the stats as second argument. Use this to add your own metrics
+
+## Alternatives
+
+- Run node with `--trace-gc` or --trace-gc-nvp` for more detailed information
