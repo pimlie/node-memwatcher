@@ -39,6 +39,54 @@ See the [example](./example/app.js) for a demo application. To run the example: 
 
 Please read the [FAQ](https://github.com/pimlie/node-memwatcher/wiki/FAQ)
 
+## Exported Methods
+
+#### `setOptions`
+
+_receives_: `object`, _returns_: `options`
+
+This helper method sets the default options and warns/corrects confliciting options
+
+#### `getMemwatch`
+
+_returns_ `memwatch`
+
+Returns the node-memwatch instance if the peer dependency is installed, otherwise returns a fake memwatch api
+
+#### `startHeapDiff`
+
+_returns_ `HeapDiff` instance
+
+A helper function which returns the heap diff instance created by `new node-memwatch.HeapDiff`
+
+#### `endHeapDiff`
+
+_receives_ `boolean`, _returns_ heap diff
+
+A helper function which returns `false` if no heap diff was started and other wise the heap diff created by node-memwatch. When it receives `true` as first argument the diff is pretty printed to the console
+
+#### `clearHeapDiff`
+
+A helper function to clear / cancel a started heap diff
+
+#### `getHeapStats`
+
+_receives_ `object` (optional), _returns_ `stats`
+
+A helper function which add extra stats like usage_trend and min / max heap usage. When the first argument is omitted, it used `v8.getHeapStatistics` as stats. If you pass any other other variable then a stats object from `v8.getHeapStatistiscs` or `node-memwatch` it will probably result in an error
+
+#### `startStatsInterval`
+
+_receives_ `function`, _returns_ `interval`
+
+Starts a timer which calls `getHeapStats` every second and passes the results to the provided `callback`.
+
+#### `start`
+
+_receives_ `options`
+
+When called it starts logging or graphing memory usage. Depending on `options` listens either for the stats event or cakks startStatsInterval to periodically graph the memory usage
+
 ## Options
 
 #### `graph` _boolean_ (false)
