@@ -134,7 +134,7 @@ A helper function which add extra stats like usage_trend and min / max heap usag
 
 Starts a timer which calls `getHeapStats` every second and passes the results to the provided `callback`. This is used internally to update the graph if you are not listening for gc stat events
 
-#### `void start(options)`
+#### `void start(options = {})`
 
 When called it starts logging or graphing memory usage. Depending on `options` listens either for the stats event or cakks startStatsInterval to periodically graph the memory usage
 
