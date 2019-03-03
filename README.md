@@ -54,7 +54,7 @@ If true then we listen for the stats event from node-memwatch and display real t
 #### `gcMetrics` _boolean_ (false)
 
 If true then the graph is updated when a stats event is received from node-memwatch. The graph is updated every 1 second, to match that interval we add the metrics by default also every second. As gc stats might not be available, we use [`v8.getHeapStatistics`](https://nodejs.org/api/v8.html#v8_v8_getheapstatistics) to retrieve the stats. This gives us a nice resolution, but this method returns actual heap statistics (as in, there might be memory which node could release but just hasnt yet).
-When you are hunting down a memory leak, the heap usage just after the gc has run gives you a better understanding of your app's memory usage (with a lower resolution as trade off)
+When you are hunting down a memory leak, the heap usage just after the gc has run gives you a better understanding of your app's memory usage (with a lower resolution as trade off). See the [faq](https://github.com/pimlie/node-memwatcher/wiki/FAQ#how-can-i-update-the-graph-more-frequently-with-gcmetric-true) for a possible work-around to still get a high resolution
 
 #### `averages` _boolean_ (false)
 
