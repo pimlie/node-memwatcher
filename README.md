@@ -106,27 +106,19 @@ A function or array of functions which are called every time new metrics are add
 
 ## Exported Methods
 
-#### `[object] setOptions(options = {})`
-
-_receives_: `object`, _returns_: `options`
+#### `object = setOptions(options = {})`
 
 This helper method sets the default options and warns/corrects confliciting options
 
-#### `[node-memwatch] getMemwatch()`
-
-_returns_ `memwatch`
+#### `object = getMemwatch()`
 
 Returns the node-memwatch instance if the peer dependency is installed, otherwise returns a fake memwatch api
 
-#### `[HeapDiff] startHeapDiff()`
-
-_returns_ `node-memwatch.HeapDiff` instance
+#### `HeapDiff = startHeapDiff()`
 
 A helper function which returns the heap diff instance created by `new node-memwatch.HeapDiff`
 
-#### `[object/false] endHeapDiff(boolean)`
-
-_receives_ `boolean`, _returns_ heap diff
+#### `object/false = endHeapDiff(boolean)`
 
 A helper function which returns `false` if no heap diff was started and otherwise the heap diff created by node-memwatch. When it receives `true` as first argument the diff is pretty printed to the console
 
@@ -134,13 +126,11 @@ A helper function which returns `false` if no heap diff was started and otherwis
 
 A helper function to clear / cancel a started heap diff
 
-#### `getHeapStats`
-
-_receives_ `object` (optional), _returns_ `stats`
+#### `object = getHeapStats(stats?)`
 
 A helper function which add extra stats like usage_trend and min / max heap usage. When the first argument is omitted, it uses `v8.getHeapStatistics` for stats. If you pass any other other variable then a stats object from `v8.getHeapStatistiscs` or `node-memwatch` it will probably result in an error
 
-#### `[interval] startStatsInterval(stats?)`
+#### `interval = startStatsInterval(callback)`
 
 Starts a timer which calls `getHeapStats` every second and passes the results to the provided `callback`. This is used internally to update the graph if you are not listening for gc stat events
 
