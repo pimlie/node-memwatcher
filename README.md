@@ -7,10 +7,10 @@
 
 This library lets you quickly log and view graphs of the memory stats of your node application. Also it can e.g. create automatic heap diffs when a possible memory leak is detected. It is in essential a wrapper for node-memwatch, but it also provides a fake node-memwatch api which uses v8.getHeapStatistics and global.gc instead. This is because node-memwatch uses gyp bindings which might not be what you want in some cases, therefore node-memwatch is a peer dependency.
 
-<p align="center"><a href="./assets/demo.mp4"><img src="./assets/demo.gif" alt="node-memwatcher demo"/></a></p>
+<p align="center"><a href="./assets/demo.mp4?raw=true"><img src="./assets/demo.gif" alt="node-memwatcher demo"/></a></p>
 
 Log gc stats with automatich heap dumps on possible memory leaks
-<p align="center"><a href="./assets/demo2.mp4"><img src="./assets/demo2.gif" alt="node-memwatcher demo2"/></a></p>
+<p align="center"><a href="./assets/demo2.mp4?raw=true"><img src="./assets/demo2.gif" alt="node-memwatcher demo2"/></a></p>
 
 ## Setup
 
