@@ -1,6 +1,6 @@
 {
   "name": "node-memwatcher",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "license": "MIT",
   "description": "Quickly watch real-time memory stats of your node app",
   "main": "dist/index.js",
