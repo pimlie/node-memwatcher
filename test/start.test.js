@@ -1,8 +1,8 @@
 import v8 from 'v8'
-import * as start from '../lib/start'
-import * as utils from '../lib/utils'
-import * as memwatch from '../lib/memwatch'
-import * as formatting from '../lib/formatting'
+import * as start from '../src/start'
+import * as utils from '../src/utils'
+import * as memwatch from '../src/memwatch'
+import * as formatting from '../src/formatting'
 
 const noop = () => {}
 

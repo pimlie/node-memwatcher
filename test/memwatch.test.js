@@ -1,7 +1,7 @@
 import nodeMemwatch from '@airbnb/node-memwatch'
-import * as memwatch from '../lib/memwatch'
-import * as start from '../lib/start'
-import * as utils from '../lib/utils'
+import * as memwatch from '../src/memwatch'
+import * as start from '../src/start'
+import * as utils from '../src/utils'
 
 const noop = () => {}
 

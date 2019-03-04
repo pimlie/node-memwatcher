@@ -1,8 +1,8 @@
-import * as interrupt from '../lib/interrupt'
-import * as memwatch from '../lib/memwatch'
-import * as start from '../lib/start'
+import * as interrupt from '../src/interrupt'
+import * as memwatch from '../src/memwatch'
+import * as start from '../src/start'
 
-jest.mock('../lib/start')
+jest.mock('../src/start')
 
 describe('interrupt', () => {
   let procSpy

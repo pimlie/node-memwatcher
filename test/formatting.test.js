@@ -1,4 +1,4 @@
-import * as formatting from '../lib/formatting'
+import * as formatting from '../src/formatting'
 import gcStats from './utils/gc-stats'
 import heapDiff from './utils/heap-diff'
 

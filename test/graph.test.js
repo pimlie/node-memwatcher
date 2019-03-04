@@ -1,6 +1,6 @@
-import * as graph from '../lib/graph'
-import * as formatting from '../lib/formatting'
-import { setOptions } from '../lib/utils'
+import * as graph from '../src/graph'
+import * as formatting from '../src/formatting'
+import { setOptions } from '../src/utils'
 
 jest.mock('turtle-race', () => {
   return function turtle() {
