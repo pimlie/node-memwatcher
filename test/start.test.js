@@ -43,7 +43,7 @@ describe('start', () => {
     const spy = jest.fn()
 
     start.startStatsInterval(spy)
-    
+
     jest.advanceTimersByTime(2001)
 
     expect(spy).toHaveBeenCalledTimes(2)
@@ -53,18 +53,18 @@ describe('start', () => {
 
   test('can create heap diff and print stats', async () => {
     const end = jest.fn().mockReturnValue(1)
-    
+
     jest.spyOn(utils.logger, 'log').mockImplementation(noop)
     jest.spyOn(utils.logger, 'info').mockImplementation(noop)
     jest.spyOn(formatting, 'getDiff').mockReturnValue('diff')
     jest.spyOn(memwatch, 'getMemwatch').mockImplementation(() => {
       return {
-        HeapDiff: function() {
+        HeapDiff: function () {
           return { end }
         }
       }
     })
-    
+
     await start.startHeapDiff()
     const diff = start.endHeapDiff(true)
 
@@ -82,12 +82,12 @@ describe('start', () => {
 
     jest.spyOn(memwatch, 'getMemwatch').mockImplementation(() => {
       return {
-        HeapDiff: function() {
+        HeapDiff: function () {
           return { end }
         }
       }
     })
-    
+
     await start.startHeapDiff()
     start.clearHeapDiff()
     const diff = start.endHeapDiff()
@@ -104,9 +104,9 @@ describe('start', () => {
     jest.spyOn(start, 'startStatsInterval').mockImplementation(noop)
 
     const fakeMemwatch = memwatch.fakeMemwatch()
-    let callback
+    let eventCallback
     jest.spyOn(fakeMemwatch, 'on').mockImplementation((eventName, _callback) => {
-      callback = _callback
+      eventCallback = _callback
     })
     jest.spyOn(memwatch, 'getMemwatch').mockReturnValue(fakeMemwatch)
 
@@ -115,21 +115,21 @@ describe('start', () => {
     expect(utils.logger.success).toHaveBeenCalledTimes(1)
     expect(utils.logger.info).toHaveBeenCalledTimes(1)
 
-    callback({
+    eventCallback({
       used_heap_size: 10,
       total_heap_size: 10
     })
 
     expect(utils.logger.debug).toHaveBeenCalledTimes(2)
-    
+
     // header is printed
     expect(utils.logger.debug).toHaveBeenCalledWith(expect.stringMatching('current'))
     // stats are printed
     expect(utils.logger.debug).toHaveBeenCalledWith(expect.stringMatching('10.00 B'))
-    
+
     jest.resetAllMocks()
 
-    callback({
+    eventCallback({
       used_heap_size: 10,
       total_heap_size: 10
     })

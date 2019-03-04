@@ -1,4 +1,3 @@
-import nodeMemwatch from '@airbnb/node-memwatch'
 import * as memwatch from '../src/memwatch'
 import * as start from '../src/start'
 import * as utils from '../src/utils'
@@ -26,12 +25,12 @@ describe('memwatch', () => {
    * skip this for now and just test fakeMemwatch
    */
   test.skip('returns fake memwatch when peer dep missing', async () => {
-    jest.doMock('@airbnb/node-memwatch', () => Promise.reject())
+    jest.doMock('@airbnb/node-memwatch', () => Promise.reject(new Error()))
 
     const m = await memwatch.loadMemwatch()
     expect(m).toBeTruthy()
     expect(m._faked).toBeDefined()
-    
+
     jest.unmock('@airbnb/node-memwatch')
   })
 
@@ -39,13 +38,13 @@ describe('memwatch', () => {
     const spy = jest.spyOn(utils.logger, 'warn')
 
     const fakeMemwatch = memwatch.fakeMemwatch()
-    
+
     expect(fakeMemwatch.HeapDiff).toEqual(expect.any(Function))
     expect(fakeMemwatch.gc).toEqual(expect.any(Function))
     expect(fakeMemwatch.on).toEqual(expect.any(Function))
     expect(spy).not.toHaveBeenCalled()
   })
-  
+
   test('fake memwatch warns on calling gc', () => {
     const spy = jest.spyOn(utils.logger, 'warn').mockImplementation(noop)
 

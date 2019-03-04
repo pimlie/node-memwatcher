@@ -17,7 +17,7 @@ describe('utils', () => {
     }
 
     let options = utils.setOptions({ ...myOptions })
-    
+
     expect(options.graph).toBe(true)
     expect(options.verbose).toBe(true)
     expect(options.autoHeapDiff).toBe(false)

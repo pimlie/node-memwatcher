@@ -26,14 +26,14 @@ describe('formatting', () => {
       [1.1, '1.1 s'],
       [0.011, '11.0 ms'],
       [0.00011, '110.0 us'],
-      [0.0000000011, '1.1 ns'],
+      [0.0000000011, '1.1 ns']
     ]
-    
+
     for (const time of times) {
       expect(formatting.humanSeconds(time[0])).toBe(time[1])
     }
   })
-  
+
   test('pretty columns', () => {
     formatting.getStatLine({ key: 2 })
     expect(formatting.getValue({ pretty: true }, 'key', 3)).toMatchSnapshot()
@@ -47,7 +47,7 @@ describe('formatting', () => {
   test('gc stats - getHeader', () => {
     expect(formatting.getHeader({}, gcStats[0])).toMatchSnapshot()
   })
-  
+
   test('gc stats - getStats', () => {
     expect(formatting.getStats({}, gcStats[0])).toMatchSnapshot()
     expect(formatting.getStats({}, gcStats[1])).toMatchSnapshot()
@@ -69,7 +69,7 @@ describe('formatting', () => {
     expect(formatting.getStatLine(gcStats[1])).toMatchSnapshot()
     expect(formatting.getStatLine(gcStats[2])).toMatchSnapshot()
   })
-  
+
   test('getDiff', () => {
     expect(formatting.getDiff(heapDiff)).toMatchSnapshot()
   })

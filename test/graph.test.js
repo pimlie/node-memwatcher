@@ -29,7 +29,7 @@ describe('graph', () => {
     expect(graph.metricColor(0.61)).toBe('yellow,bold')
     expect(graph.metricColor(0.6)).toBe('')
   })
-  
+
   test('setupGraph', () => {
     const graphSetup = jest.fn()
     const groupName = 'test group'
@@ -48,7 +48,7 @@ describe('graph', () => {
     expect(_graph.turtle.metric).toHaveBeenCalledWith(groupName, 'usageTrend')
     expect(_graph.turtle.metric).toHaveBeenCalledWith(groupName, 'maxSize')
   })
-  
+
   test('addMetrics', () => {
     const graphAddMetric = jest.fn()
     const stats = {

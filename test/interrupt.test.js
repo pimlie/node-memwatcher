@@ -8,8 +8,6 @@ describe('interrupt', () => {
   let procSpy
   let signal
 
-  const noop = () => {}
-
   beforeAll(() => {
     procSpy = jest.spyOn(process, 'once')
   })
@@ -31,7 +29,7 @@ describe('interrupt', () => {
     })
 
     interrupt.listenInterrupt()
-    
+
     expect(procSpy).toHaveBeenCalledTimes(2)
     expect(start.startHeapDiff).toHaveBeenCalledTimes(1)
     expect(start.endHeapDiff).not.toHaveBeenCalled()
@@ -62,7 +60,7 @@ describe('interrupt', () => {
     const gc = jest.fn()
     const memSpy = jest.spyOn(memwatch, 'getMemwatch').mockImplementation(() => ({ gc }))
 
-    await new Promise(resolve => {
+    await new Promise((resolve) => {
       procSpy.mockImplementationOnce(async (s, listener) => {
         await listener()
         resolve()
