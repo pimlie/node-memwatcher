@@ -1,4 +1,6 @@
+import v8 from 'v8'
 import consola from 'consola'
+import { mean } from 'simple-statistics'
 import { defaultOptions } from './constants'
 
 export const logger = consola.withTag('memwatch')
@@ -6,6 +8,10 @@ export const logger = consola.withTag('memwatch')
 if (logger.level < 4) {
   logger.level = 4
 }
+
+let heapMin = Infinity
+let heapMax = 0
+const ancientHeapSizes = []
 
 export function setOptions(options = {}) {
   /* istanbul ignore next */
@@ -62,11 +68,35 @@ export function setOptions(options = {}) {
   return options
 }
 
-export function sortHeapDiffDetails(a, b) {
-  if (b.size_bytes !== a.size_bytes) {
-    return b.size_bytes - a.size_bytes
+export function getHeapStats(stats) {
+  if (!stats) {
+    stats = v8.getHeapStatistics()
   }
 
-  // what should be unique
-  return a.what > b.what ? 1 : -1
+  // calculate usage_trend similar as memwatch
+  ancientHeapSizes.push(stats.used_heap_size)
+  ancientHeapSizes.splice(0, ancientHeapSizes.length - 120)
+
+  const ancientHeapSize = mean(ancientHeapSizes)
+  const recentHeapSize = mean(ancientHeapSizes.slice(-10))
+
+  stats.usage_trend = Math.round(10 * (recentHeapSize - ancientHeapSize) / ancientHeapSize) / 10
+  stats.min_heap_size = heapMin = Math.min(heapMin, stats.total_heap_size)
+  stats.max_heap_size = heapMax = Math.max(heapMax, stats.total_heap_size)
+
+  return stats
+}
+
+export function startStatsInterval(callback) {
+  const hasCallback = typeof callback === 'function'
+
+  let statCounter = 0
+  return setInterval(() => {
+    const stats = getHeapStats()
+    stats.gcMarkSweepCompactCount = ++statCounter
+
+    if (hasCallback) {
+      callback(stats)
+    }
+  }, 1000)
 }

@@ -2,7 +2,6 @@ import cliui from 'cliui'
 import chalk from 'chalk'
 import { mean, standardDeviation } from 'simple-statistics'
 import { memwatchHeader, heapHeader, heapHeaderPart, diffHeader, diffDetailsHeader } from './constants'
-import { sortHeapDiffDetails } from './utils'
 
 let previousStats = {}
 const previousHeapSizes = []
@@ -332,4 +331,13 @@ export function getDiff(diff) {
   ui.div('')
 
   return ui.toString()
+}
+
+export function sortHeapDiffDetails(a, b) {
+  if (b.size_bytes !== a.size_bytes) {
+    return b.size_bytes - a.size_bytes
+  }
+
+  // what should be unique
+  return a.what > b.what ? 1 : -1
 }

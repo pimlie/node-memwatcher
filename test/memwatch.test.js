@@ -1,5 +1,4 @@
 import * as memwatch from '../src/memwatch'
-import * as start from '../src/start'
 import * as utils from '../src/utils'
 
 const noop = () => {}
@@ -64,7 +63,7 @@ describe('memwatch', () => {
   })
 
   test('fake memwatch starts interval for sending fake events', () => {
-    const spy = jest.spyOn(start, 'startStatsInterval').mockReturnValue(1)
+    const spy = jest.spyOn(utils, 'startStatsInterval').mockReturnValue(1)
 
     const fakeMemwatch = memwatch.fakeMemwatch()
 

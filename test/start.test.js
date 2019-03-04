@@ -1,7 +1,8 @@
 import v8 from 'v8'
-import * as start from '../src/start'
+import start from '../src/start'
 import * as utils from '../src/utils'
 import * as memwatch from '../src/memwatch'
+import * as heapdiff from '../src/heapdiff'
 import * as formatting from '../src/formatting'
 
 const noop = () => {}
@@ -18,7 +19,7 @@ describe('start', () => {
         used_heap_size: 10,
         total_heap_size: 10
       })
-      start.getHeapStats()
+      utils.getHeapStats()
     }
 
     expect(spy).toHaveBeenCalledTimes(10)
@@ -28,7 +29,7 @@ describe('start', () => {
       total_heap_size: 400
     })
 
-    const stats = start.getHeapStats()
+    const stats = utils.getHeapStats()
 
     expect(stats.used_heap_size).toBe(200)
     expect(stats.total_heap_size).toBe(400)
@@ -42,7 +43,7 @@ describe('start', () => {
     jest.useFakeTimers()
     const spy = jest.fn()
 
-    start.startStatsInterval(spy)
+    utils.startStatsInterval(spy)
 
     jest.advanceTimersByTime(2001)
 
@@ -65,8 +66,8 @@ describe('start', () => {
       }
     })
 
-    await start.startHeapDiff()
-    const diff = start.endHeapDiff(true)
+    await heapdiff.startHeapDiff()
+    const diff = heapdiff.endHeapDiff(true)
 
     expect(utils.logger.log).toHaveBeenCalledTimes(1)
     expect(utils.logger.info).toHaveBeenCalledTimes(2)
@@ -88,9 +89,9 @@ describe('start', () => {
       }
     })
 
-    await start.startHeapDiff()
-    start.clearHeapDiff()
-    const diff = start.endHeapDiff()
+    await heapdiff.startHeapDiff()
+    heapdiff.clearHeapDiff()
+    const diff = heapdiff.endHeapDiff()
 
     expect(utils.logger.info).toHaveBeenCalledTimes(1)
     expect(end).not.toHaveBeenCalled()
@@ -101,7 +102,7 @@ describe('start', () => {
     jest.spyOn(utils.logger, 'success').mockImplementation(noop)
     jest.spyOn(utils.logger, 'info').mockImplementation(noop)
     jest.spyOn(utils.logger, 'debug').mockImplementation(noop)
-    jest.spyOn(start, 'startStatsInterval').mockImplementation(noop)
+    jest.spyOn(utils, 'startStatsInterval').mockImplementation(noop)
 
     const fakeMemwatch = memwatch.fakeMemwatch()
     let eventCallback
@@ -110,7 +111,7 @@ describe('start', () => {
     })
     jest.spyOn(memwatch, 'getMemwatch').mockReturnValue(fakeMemwatch)
 
-    await start.start()
+    await start()
 
     expect(utils.logger.success).toHaveBeenCalledTimes(1)
     expect(utils.logger.info).toHaveBeenCalledTimes(1)

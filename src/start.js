@@ -1,80 +1,12 @@
-import v8 from 'v8'
 import { mean } from 'simple-statistics'
-import { getHeader, getStats, getHeapAverages, getDiff } from './formatting'
+import { getHeader, getStats, getHeapAverages } from './formatting'
 import { addMetrics, setGraphMessage } from './graph'
 import { listenInterrupt, doGC } from './interrupt'
 import { getMemwatch } from './memwatch'
-import { logger, setOptions } from './utils'
+import { logger, setOptions, getHeapStats, startStatsInterval } from './utils'
+import { startHeapDiff, endHeapDiff, clearHeapDiff } from './heapdiff'
 
-let heapDiff
-let heapMin = Infinity
-let heapMax = 0
-const ancientHeapSizes = []
-
-export async function startHeapDiff() {
-  logger.info('Dumping first heap (could take a while)')
-
-  const memwatch = await getMemwatch()
-
-  heapDiff = new memwatch.HeapDiff()
-  return heapDiff
-}
-
-export function endHeapDiff(printStats) {
-  if (!heapDiff) {
-    return false
-  }
-
-  logger.info('Dumping second heap and create diff (could take a while)')
-  const diffStats = heapDiff.end()
-
-  if (printStats) {
-    logger.log(getDiff(diffStats))
-  }
-
-  return diffStats
-}
-
-export function clearHeapDiff() {
-  if (heapDiff) {
-    heapDiff = undefined
-  }
-}
-
-export function getHeapStats(stats) {
-  if (!stats) {
-    stats = v8.getHeapStatistics()
-  }
-
-  // calculate usage_trend similar as memwatch
-  ancientHeapSizes.push(stats.used_heap_size)
-  ancientHeapSizes.splice(0, ancientHeapSizes.length - 120)
-
-  const ancientHeapSize = mean(ancientHeapSizes)
-  const recentHeapSize = mean(ancientHeapSizes.slice(-10))
-
-  stats.usage_trend = Math.round(10 * (recentHeapSize - ancientHeapSize) / ancientHeapSize) / 10
-  stats.min_heap_size = heapMin = Math.min(heapMin, stats.total_heap_size)
-  stats.max_heap_size = heapMax = Math.max(heapMax, stats.total_heap_size)
-
-  return stats
-}
-
-export function startStatsInterval(callback) {
-  const hasCallback = typeof callback === 'function'
-
-  let statCounter = 0
-  return setInterval(() => {
-    const stats = getHeapStats()
-    stats.gcMarkSweepCompactCount = ++statCounter
-
-    if (hasCallback) {
-      callback(stats)
-    }
-  }, 1000)
-}
-
-export async function start(options = {}) {
+export default async function start(options = {}) {
   const memwatch = await getMemwatch()
 
   if (memwatch._faked) {

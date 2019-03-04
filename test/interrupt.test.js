@@ -1,8 +1,8 @@
 import * as interrupt from '../src/interrupt'
 import * as memwatch from '../src/memwatch'
-import * as start from '../src/start'
+import * as heapdiff from '../src/heapdiff'
 
-jest.mock('../src/start')
+jest.mock('../src/heapdiff')
 
 describe('interrupt', () => {
   let procSpy
@@ -31,8 +31,8 @@ describe('interrupt', () => {
     interrupt.listenInterrupt()
 
     expect(procSpy).toHaveBeenCalledTimes(2)
-    expect(start.startHeapDiff).toHaveBeenCalledTimes(1)
-    expect(start.endHeapDiff).not.toHaveBeenCalled()
+    expect(heapdiff.startHeapDiff).toHaveBeenCalledTimes(1)
+    expect(heapdiff.endHeapDiff).not.toHaveBeenCalled()
   })
 
   test('default signal is SIGUSR2', () => {
@@ -52,8 +52,8 @@ describe('interrupt', () => {
     interrupt.listenInterrupt()
 
     expect(procSpy).toHaveBeenCalledTimes(3)
-    expect(start.startHeapDiff).toHaveBeenCalledTimes(1)
-    expect(start.endHeapDiff).toHaveBeenCalledTimes(1)
+    expect(heapdiff.startHeapDiff).toHaveBeenCalledTimes(1)
+    expect(heapdiff.endHeapDiff).toHaveBeenCalledTimes(1)
   })
 
   test('calls gc on interrupt ', async () => {

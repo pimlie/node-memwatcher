@@ -1,5 +1,4 @@
-import { logger } from './utils'
-import { startStatsInterval } from './start'
+import { logger, startStatsInterval } from './utils'
 
 let memwatch
 

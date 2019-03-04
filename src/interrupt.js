@@ -1,6 +1,6 @@
 import env from 'std-env'
 import { getMemwatch } from './memwatch'
-import { startHeapDiff, endHeapDiff } from './start'
+import { startHeapDiff, endHeapDiff } from './heapdiff'
 
 export function doStartDiff() {
   listenInterrupt(doEndDiff)
