@@ -2,3 +2,5 @@ node_modules
 coverage
 .nuxt
 yarn-error.log
+dist
+es

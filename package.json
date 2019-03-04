@@ -3,15 +3,20 @@
   "version": "0.1.2",
   "license": "MIT",
   "description": "Quickly watch real-time memory stats of your node app",
-  "main": "src/index.js",
+  "main": "dist/index.js",
+  "module": "es/index.js",
   "files": [
-    "lib"
+    "dist",
+    "es"
   ],
   "scripts": {
+    "build": "rm -Rf dist es && yarn build:cjs && yarn build:es",
+    "build:cjs": "bili",
+    "build:es": "babel src --env-name es --out-dir es",
     "coverage": "cat ./coverage/lcov.info | coveralls",
     "demo": "node example/app",
     "lint": "eslint src test example",
-    "release": "yarn lint && yarn test && standard-version",
+    "release": "yarn lint && yarn test && yarn build && standard-version",
     "test": "jest"
   },
   "keywords": [
@@ -35,6 +40,7 @@
   },
   "devDependencies": {
     "@airbnb/node-memwatch": "^1.0.2",
+    "@babel/cli": "^7.2.3",
     "@babel/core": "^7.3.4",
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
     "@babel/preset-env": "^7.3.4",
@@ -42,6 +48,7 @@
     "babel-eslint": "^10.0.1",
     "babel-jest": "^24.1.0",
     "babel-plugin-dynamic-import-node": "^2.2.0",
+    "bili": "^4.4.0",
     "coveralls": "^3.0.3",
     "eslint": "^5.14.1",
     "eslint-config-standard": "^12.0.0",
