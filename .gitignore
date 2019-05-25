@@ -1,6 +1,7 @@
 node_modules
 coverage
 .nuxt
+.noderc
 yarn-error.log
 dist
 es
